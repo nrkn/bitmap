@@ -1,0 +1,37 @@
+{
+  "name": "bitmap-data",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && mocha ./dist/test",
+    "coverage": "tsc && nyc --reporter=html --reporter=text mocha ./dist/test"
+  },
+  "nyc": {
+    "exclude": [
+      "./dist/test"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nrkn/bitmap.git"
+  },
+  "keywords": [],
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrkn/bitmap/issues"
+  },
+  "homepage": "https://github.com/nrkn/bitmap#readme",
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.12",
+    "@types/pngjs": "^3.3.2",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "pngjs": "^3.4.0"
+  }
+}
