@@ -30,4 +30,6 @@ export const line = ( x0: number, y0: number, x1: number, y1: number ) => {
 
     line.push( [ x0, y0 ] )
   }
+
+  return line
 }

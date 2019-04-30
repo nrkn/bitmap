@@ -1,14 +1,18 @@
-import { BitmapData, Point } from './types'
+import { BitmapData, Point, Mode } from './types'
 import { modes } from './modes'
 
-export const plot = ( image: BitmapData, points: Point[], mode = modes.q ) => {
-  const { width, height } = image
+export const plot =
+  ( image: BitmapData, points: Point[], mode: Mode = modes.q ) => {
+    const { width, height } = image
 
-  points.forEach( ( [ x, y ] ) => {
-    if( x < 0 || y < 0 || x >= width || y >= height ) return
+    points.forEach( ( [ x, y ] ) => {
+      x = x | 0
+      y = y | 0
 
-    const index = y * width + x
+      if( x < 0 || y < 0 || x >= width || y >= height ) return
 
-    image.data[ index ] = mode( image.data[ index ], 1 )
-  } )
-}
+      const index = y * width + x
+
+      image.data[ index ] = mode( image.data[ index ], 1 )
+    } )
+  }

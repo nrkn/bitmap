@@ -1,5 +1,5 @@
 {
-  "name": "bitmap-data",
+  "name": "bitmap-image-data",
   "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",

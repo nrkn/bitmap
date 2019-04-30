@@ -10,5 +10,9 @@ export const modes = {
   xor: ( p, q ): Bit => ( p ? 1 : 0 ) ^ ( q ? 1 : 0 ) ? 1 : 0,
   xnor: ( p, q ): Bit => not( modes.xor( p, q ) ),
   p: ( p, _q ): Bit => p ? 1 : 0,
-  q: ( _p, q ): Bit => q ? 1 : 0
+  q: ( _p, q ): Bit => q ? 1 : 0,
+  notP: ( p, q ): Bit => not( modes.p( p, q ) ),
+  notQ: ( p, q ): Bit => not( modes.q( p, q ) ),
+  true: ( _p, _q ): Bit => 1,
+  false: ( _p, _q ): Bit => 0
 }

@@ -17,3 +17,23 @@ export interface Modes {
 }
 
 export type Point = [ number, number ]
+
+export type Triangle = [ Point, Point, Point ]
+
+export interface BoundingRect {
+  top: number
+  right: number
+  bottom: number
+  left: number
+}
+
+export interface Size {
+  width: number
+  height: number
+}
+
+export interface PointSet {
+  add: ( p: Point ) => void
+  has: ( p: Point ) => boolean
+  points: Point[]
+}

@@ -11,9 +11,6 @@ export const paste = (
   dx = dx | 0
   dy = dy | 0
 
-  const sourceData = new Uint32Array( source.data )
-  const destData = new Uint32Array( dest.data )
-
   for ( let y = 0; y < height; y++ ) {
     const destY = dy + y
 
@@ -27,8 +24,8 @@ export const paste = (
       const sourceIndex = y * source.width + x
       const destIndex = destY * dest.width + destX
 
-      destData[ destIndex ] = mode(
-        destData[ destIndex ], sourceData[ sourceIndex ]
+      dest.data[ destIndex ] = mode(
+        dest.data[ destIndex ], source.data[ sourceIndex ]
       )
     }
   }

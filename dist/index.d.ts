@@ -1,0 +1,13 @@
+import { BitmapData } from './types';
+export { copy } from './copy';
+export { fill } from './fill';
+export { line } from './line';
+export { modes } from './modes';
+export { oval } from './oval';
+export { paste } from './paste';
+export { plot } from './plot';
+export { fromPng, toPng } from './png';
+export { resize } from './resize';
+export { triangle } from './triangle';
+export declare const createBitmap: (width: number, height: number, data?: any[] | undefined) => BitmapData;
+export declare const clone: (bitmap: BitmapData) => BitmapData;

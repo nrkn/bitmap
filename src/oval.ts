@@ -1,24 +1,32 @@
-import { createBitmap } from '.'
+import { Point } from './types'
 
-export const oval = ( width: number, height: number, start = 0, end = 0 ) => {
-  const image = createBitmap( width, height )
-  const { data } = image
-
+export const oval = (
+  width: number, height: number,
+  startRadians = 0, endRadians = 0, anticlockwise = false
+) => {
+  const points: Point[] = []
   for ( let y = 0; y < height; y++ ) {
     for ( let x = 0; x < width; x++ ) {
-      const isInside = inOval( x, y, width, height, start, end )
-      const index = y * width + x
+      const isInside = inOvalArc(
+        x, y, width, height, startRadians, endRadians, anticlockwise
+      )
 
-      data[ index ] = isInside ? 1 : 0
+      if( isInside ){
+        points.push( [ x, y ] )
+      }
     }
   }
 
-  return image
+  return points
 }
 
-export const inOval = ( x, y, width, height, start = 0, end = 0 ) => {
-  const xStep = 1 / ( width )
-  const yStep = 1 / ( height )
+export const inOvalArc = (
+  x: number, y: number,
+  width: number, height: number,
+  startRadians: number, endRadians: number, anticlockwise: boolean
+) => {
+  const xStep = 1 / width
+  const yStep = 1 / height
 
   const xOff = 1 / ( width * 2 )
   const yOff = 1 / ( height * 2 )
@@ -29,13 +37,30 @@ export const inOval = ( x, y, width, height, start = 0, end = 0 ) => {
   const dX = xNormal - 0.5
   const dY = yNormal - 0.5
 
-  if ( start !== end ) {
-    const theta = Math.atan2( dX, dY )
+  if ( startRadians !== endRadians ) {
+    const theta = Math.atan2( dY, dX ) * ( anticlockwise ? -1 : 1 )
 
-    if ( theta < start || theta > end ) return false
+    if ( !between( startRadians, endRadians, theta ) )
+      return false
   }
 
   const dist = Math.hypot( dX, dY )
 
   return dist <= 0.5
+}
+
+const pi2 = Math.PI * 2
+
+const between = ( start: number, end: number, mid: number ) => {
+  end = normalize( end - start )
+  mid = normalize( mid - start )
+
+  return mid <= end
+}
+
+const normalize = ( radians: number ) => {
+  while( radians < 0 ) radians += pi2
+  while( radians > pi2 ) radians -= pi2
+
+  return radians
 }
